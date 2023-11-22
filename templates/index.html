@@ -1,19 +1,33 @@
 {% extends 'base.html' %} {% block content %}
 <p>{{movies|length}} Titles</p>
+{% if current_user.is_authenticated %}
 <form action="" method="post">
-  Name <input type="text" name="title" autocomplete="off" required>
-  Year <input type="text" name="year" autocomplete="off" required>
-  <input class="button" type="submit" name="submit" value="Add">
+  Name <input type="text" name="title" autocomplete="off" required /> Year
+  <input type="text" name="year" autocomplete="off" required />
+  <input class="button" type="submit" name="submit" value="Add" />
 </form>
+{% endif %}
 <ul class="movie-list">
   {% for movie in movies %}
   <li>
     {{movie.title}} - {{movie.year}}
     <span class="float-right">
+      {% if current_user.is_authenticated %}
       <a class="button" href="{{url_for('edit',movie_id=movie.id)}}">Edit</a>
-      <form action="{{url_for('delete',movie_id=movie.id)}}" class="inline-form" method="post">
-        <input type="submit" class="button" name="delete" value="delete" onclick="return confirm('Are you sure?')">
+      <form
+        action="{{url_for('delete',movie_id=movie.id)}}"
+        class="inline-form"
+        method="post"
+      >
+        <input
+          type="submit"
+          class="button"
+          name="delete"
+          value="delete"
+          onclick="return confirm('Are you sure?')"
+        />
       </form>
+      {% endif %}
       <a
         href="https://www.imdb.com/find?q={{ movie.title }}"
         class="imdb"
