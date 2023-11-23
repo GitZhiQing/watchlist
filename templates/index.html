@@ -1,7 +1,7 @@
 {% extends 'base.html' %} {% block content %}
 <p>{{movies|length}} Titles</p>
 {% if current_user.is_authenticated %}
-<form action="" method="post">
+<form method="post">
   Name <input type="text" name="title" autocomplete="off" required /> Year
   <input type="text" name="year" autocomplete="off" required />
   <input class="button" type="submit" name="submit" value="Add" />
@@ -23,7 +23,7 @@
           type="submit"
           class="button"
           name="delete"
-          value="delete"
+          value="Delete"
           onclick="return confirm('Are you sure?')"
         />
       </form>
