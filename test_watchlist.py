@@ -1,6 +1,7 @@
 import unittest
 from app import app, db, Movie, User, forge, initdb
 import os
+
 os.environ["SQLALCHEMY_SILENCE_UBER_WARNING"] = True
 
 
@@ -100,7 +101,7 @@ class WatchlistTestCase(unittest.TestCase):
         response = self.client.post(
             "/movie/edit/1",
             data=dict(title="New Movie Edited", year="2023"),
-            follow_redirects=True
+            follow_redirects=True,
         )
         data = response.get_data(as_text=True)
         self.assertIn("Item updated.", data)
@@ -265,7 +266,6 @@ class WatchlistTestCase(unittest.TestCase):
         self.assertEqual(User.query.first().username, "qing")
         self.assertTrue(User.query.first().validate_password("123"))
 
-
     # 测试更新管理员账户
     def test_admin_command_update(self):
         result = self.runner.invoke(
@@ -276,6 +276,7 @@ class WatchlistTestCase(unittest.TestCase):
         self.assertEqual(User.query.count(), 1)
         self.assertEqual(User.query.first().username, "clear")
         self.assertTrue(User.query.first().validate_password("456"))
+
 
 if __name__ == "__main__":
     unittest.main()
