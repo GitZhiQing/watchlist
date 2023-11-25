@@ -33,6 +33,10 @@ login_manager = LoginManager(app)  # 实例化扩展类
 login_manager.login_view = "login"
 # login_manager.login_message 自定义错误提示消息
 
+"""用户加载回调函数
+Flask-Login 提供了一个 current_user 变量，注册这个函数的目的是，当程序运行后，如果用户已登录， current_user 变量的值会是当前用户的用户模型类记录。
+"""
+
 
 @login_manager.user_loader
 def laod_user(user_id):  # 创建用户加载回调函数，接受用户 ID 作为参数
@@ -153,6 +157,11 @@ def index():
 @app.route("/user/<name>")
 def user_page(name):
     return f"Welcome user: {escape(name)}"
+
+
+"""模板上下文处理函数
+对于多个模板内都需要使用的变量，我们可以使用 app.context_processor 装饰器注册一个模板上下文处理函数。这个函数返回的变量（以字典键值对的形式）将会统一注入到每一个模板的上下文环境中，因此可以直接在模板中使用。
+"""
 
 
 @app.context_processor
