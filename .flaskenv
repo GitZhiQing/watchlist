@@ -1,3 +1,3 @@
 # .flaskenv 文件
-FLASK_DEBUG=True
+FLASK_ENV=development
 FLASK_APP=watchlist
