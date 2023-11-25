@@ -2,6 +2,9 @@
 *~
 __pycache__
 .DS_Store
-.vscode
 .env
 *.db
+htmlcov/
+.coverage
+venv
+env
